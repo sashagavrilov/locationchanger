@@ -122,7 +122,7 @@ if [ "${NEW_LOCATION}" != "" ]; then
         SCRIPT="${SCRIPT_DIR}/${NEW_LOCATION}"
         if [ -f "${SCRIPT}" ]; then
             ts "Running script: '${SCRIPT}'"
-            $(${SCRIPT})
+            $(${SCRIPT} ${SSID})
         fi
     else
         ts "System is already set to the requested Location '${NEW_LOCATION}'. No change required."
