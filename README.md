@@ -83,10 +83,11 @@ Wi-Fi Only
 *Location Changer* includes support for running custom scripts when switching Locations. Scripts
 should be:
 
-* installed into the directory `${HOME}/Library/Application Support/LocationChanger` 
+* installed into the directory `${HOME}/Library/Application Support/LocationChanger`
 * named identically to the Location (e.g. `Home Wi-Fi` and not `Home Wi-Fi.sh`; if using manually configured Locations, please ensure the name matches the Location and not the SSID)
 * be executable
 
+When the script is run, the SSID gets passed as an argument, so can use it with `$1`
 
 #### Examples
 
