@@ -3,8 +3,10 @@
 # This script changes network Location based on the name of Wi-Fi network.
 DEFAULT_LOCATION='Automatic'
 ENABLE_NOTIFICATIONS=1
-CONFIG_FILE="$HOME/Library/Application Support/LocationChanger/LocationChanger.conf"
-SCRIPT_DIR="$HOME/Library/Application Support/LocationChanger" # directory for scripts attached to Locations
+APP_SUPPORT_DIR="/Library/Application Support/LocationChanger"
+DOTFILE_DIR="$HOME/.locations"
+CONFIG_FILE="$DOTFILE_DIR/LocationChanger.conf"
+SCRIPT_DIR="$DOTFILE_DIR" # directory for scripts attached to Locations
 LOGFILE=${HOME}/Library/Logs/LocationChanger.log
 
 # truncate logfile
@@ -85,12 +87,12 @@ LOCATION_NAMES=$(scselect | tail -n +2 | cut -d \( -f 2- | sed 's/)$//')
 
 
 # if not found in the config file, check if there's a Location that matches the SSID
-if [ -z "${NEW_LOCATION}"] && echo "${LOCATION_NAMES}" | grep -q "^${ESSID}$"; then
+if [ -z "${NEW_LOCATION}" ] && echo "${LOCATION_NAMES}" | grep -q "^${ESSID}$"; then
     NEW_LOCATION="${SSID}"
     NOTIFICATION_STRING="Changing from '${CURRENT_LOCATION}' to '${NEW_LOCATION}', as the Location name matches the SSID"
     ts "Location '${SSID}' was found and matches the SSID. Will switch the Location to '${NEW_LOCATION}'"
 # if still not found, try to use the DEFAULT_LOCATION
-elif [ -z "${NEW_LOCATION}"] && echo "${LOCATION_NAMES}" | grep -q "^${DEFAULT_LOCATION}$"; then
+elif [ -z "${NEW_LOCATION}" ] && echo "${LOCATION_NAMES}" | grep -q "^${DEFAULT_LOCATION}$"; then
     NEW_LOCATION="${DEFAULT_LOCATION}"
     NOTIFICATION_STRING="Changing from '${CURRENT_LOCATION}' to default Location '${DEFAULT_LOCATION}'"
     ts "Location '${SSID}' was not found. Will default to '${DEFAULT_LOCATION}'"
@@ -111,7 +113,7 @@ if [ "${NEW_LOCATION}" != "" ]; then
         SCRIPT="${SCRIPT_DIR}/${NEW_LOCATION}"
         if [ -f "${SCRIPT}" ]; then
             ts "Running script: '${SCRIPT}'"
-            $(${SCRIPT})
+            $(${SCRIPT} ${SSID})
         fi
     else
         ts "System is already set to the requested Location '${NEW_LOCATION}'. No change required."
