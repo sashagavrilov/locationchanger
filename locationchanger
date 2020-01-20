@@ -6,7 +6,7 @@ ENABLE_NOTIFICATIONS=1
 APP_SUPPORT_DIR="/Library/Application Support/LocationChanger"
 DOTFILE_DIR="$HOME/.locations"
 CONFIG_FILE="$DOTFILE_DIR/LocationChanger.conf"
-SCRIPT_DIR="$DOTFILE_DIR" # directory for scripts attached to Locations
+SCRIPT_DIR="$DOTFILE_DIR/Scripts" # directory for scripts attached to Locations
 LOGFILE=${HOME}/Library/Logs/LocationChanger.log
 
 # truncate logfile
@@ -114,6 +114,8 @@ if [ "${NEW_LOCATION}" != "" ]; then
         if [ -f "${SCRIPT}" ]; then
             ts "Running script: '${SCRIPT}'"
             $(${SCRIPT} ${SSID})
+        else
+          ts "${SCRIPT} script not found."
         fi
     else
         ts "System is already set to the requested Location '${NEW_LOCATION}'. No change required."
