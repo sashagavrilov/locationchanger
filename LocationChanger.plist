@@ -6,7 +6,7 @@
       <string>locationchanger</string>
       <key>ProgramArguments</key>
       <array>
-          <string>${SCRIPT_NAME}</string>
+          <string>usr/local/bin/location</string>
       </array>
       <key>WatchPaths</key>
       <array>
