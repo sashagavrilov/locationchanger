@@ -49,23 +49,23 @@ One example might be if your home Wi-Fi network is broadcasted on both 2.4GHz an
 and `Home Wi-Fi 5G`, respectively. Instead of maintaining Locations for each SSID, a user can manually
 configure the same Location to be used with both.
 
-*Location Changer* can also be disabled for certain locations. This is usefull, e.g., if you want 
+*Location Changer* can also be disabled for certain locations. This is useful, e.g., if you want
 to set Location manually and don't want it to be automatically changed back.
 
-Configuration happens in `${HOME}/Library/Application Support/LocationChanger/LocationChanger.conf` by default. 
+Configuration happens in `${HOME}/Library/Application Support/LocationChanger/LocationChanger.conf` by default.
 On installation a default config file is generated.
-The config file is in ini-format and contains trhe sections: `General` , `Automatic` and `Manual`. 
+The config file is in ini-format and contains the sections: `General` , `Automatic` and `Manual`.
 
-The `General` defines two configurable variables. 
+The `General` defines two configurable variables.
 DEFAULT_LOCATION specifies the Location to use, if the current WiFi is not configured explicitly. The default is 'Automatic'
-ENABLE_NOTIFICATIONS spec ifies the notification behaviour. Set it to 1 to enable notifications. For verbose notifications, 
+ENABLE_NOTIFICATIONS specifies the notification behaviour. Set it to 1 to enable notifications. For verbose notifications,
 set to 2. To disable, set to 0.
 
-The `Automatic` section defines mapping for Wi-Fi Network SSIDs as key-value pairs in the following format. 
+The `Automatic` section defines mapping for Wi-Fi Network SSIDs as key-value pairs in the following format.
 Spaces are supported for both the SSID as well as the Location name, but all spaces around the `=` will be trimmed.
 Additionally, do not enclose the SSID or Location in quotes.
 
-The `Manual` section contains a list of Location names for wich autodetection should be ignored.
+The `Manual` section contains a list of Location names for which autodetection should be ignored.
 
 ```bash
 [Automatic]
@@ -83,10 +83,11 @@ Wi-Fi Only
 *Location Changer* includes support for running custom scripts when switching Locations. Scripts
 should be:
 
-* installed into the directory `${HOME}/Library/Application Support/LocationChanger` 
+* installed into the directory `${HOME}/Library/Application Support/LocationChanger`
 * named identically to the Location (e.g. `Home Wi-Fi` and not `Home Wi-Fi.sh`; if using manually configured Locations, please ensure the name matches the Location and not the SSID)
 * be executable
 
+When the script is run, the SSID gets passed as an argument, so can use it with `$1`
 
 #### Examples
 

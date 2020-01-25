@@ -6,7 +6,7 @@ LAUNCH_AGENTS_DIR=$HOME/Library/LaunchAgents
 PLIST_NAME=$LAUNCH_AGENTS_DIR/LocationChanger.plist
 
 echo "This will uninstall LocationChanger and its config files and scripts from your Mac.\n"
-echo "Are you sure to uninstall LocationCahnger (y/n)?"
+echo "Are you sure you want to uninstall LocationChanger (y/n)?"
 read reply
 if [ "$reply" != "y" ]; then
     echo "Aborting uninstall command."
